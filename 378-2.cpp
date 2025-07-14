@@ -23,14 +23,8 @@ void solve() {
     vector<int> A(N); for (auto& x : A) cin >> x;
     int M = 1; for (auto& x : A) M += x;
     vector<bool> dp(M); dp[0] = 1;
-    FOR(i, N) {
-        FOR_R(j, M) if (dp[j]) {
-            if (A[i] + j < M) dp[j + A[i]] = 1;
-            dp[j] = 1;
-        }
-    }
-    int ANS = 0; FOR(i, M) ANS += dp[i];
-    cout << ANS << endl;
+    FOR(i, N) FOR_R(j, M - A[i]) if (dp[j]) dp[j + A[i]] = 1;
+    cout << count(all(dp), 1) << endl;
 }
 
 int main() {
