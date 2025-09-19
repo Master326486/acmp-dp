@@ -1,11 +1,3 @@
-/*
-Wrong answer
-Test 27
-Time 0.156
-Memory 11 MB
-
-*/
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -44,9 +36,9 @@ int main() {
     }
     int last = -1;
     for (int i = 0; i < N; ++i) {
-        for (int j = 0; j < N; ++j) if (!used[j]) {
+        for (int j = 0; j < N; ++j) if (!used[j] && (last == -1 || ok[last][j])) {
             if (M > dp[mask][j]) M -= dp[mask][j];
-            else if (last == -1 || ok[last][j]) {
+            else {
                 ANS.emplace_back(A[j]);
                 used[j] = 1;
                 last = j;
